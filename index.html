@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SKATEFLOW Premium | LÉO BRIEC-YVINOU</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pure-white: #ffffff;
+            --cloud-gray: #f8f9fa;
+            --concrete: #e9ecef;
+            --dark-charcoal: #212529;
+            --vibrant-blue: #007bff;
+            --neon-blue-glow: #00f2ff;
+            --signature-color: #ffd60a;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
+            --shadow-strong: 0 15px 45px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background-color: var(--pure-white);
+            color: var(--dark-charcoal);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- SYSTÈME FLOTTANT --- */
+        .bg-fly-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden; pointer-events: none;
+        }
+
+        .fly-item {
+            position: absolute;
+            color: rgba(0, 242, 255, 0.8);
+            opacity: 0.15;
+            animation: floatAway infinite linear;
+            display: flex; align-items: center; justify-content: center;
+            text-shadow: 
+                0 0 5px var(--neon-blue-glow),
+                0 0 10px var(--neon-blue-glow),
+                0 0 20px var(--neon-blue-glow),
+                0 0 40px var(--vibrant-blue);
+        }
+
+        .fly-item.skate::after { content: '🛹'; font-size: 3rem; }
+        .fly-item.helmet::after { content: '🪖'; font-size: 2.5rem; }
+        .fly-item.ramp::after { content: '📐'; font-size: 3.5rem; }
+        .fly-item.cone::after { content: '⚠️'; font-size: 2rem; }
+        .fly-item.wheel::after { content: '⚙️'; font-size: 1.5rem; }
+
+        @keyframes floatAway {
+            0% { transform: translateY(110vh) rotate(0deg) translateX(0); }
+            50% { transform: translateY(50vh) rotate(180deg) translateX(20px); }
+            100% { transform: translateY(-20vh) rotate(360deg) translateX(-20px); }
+        }
+
+        .fly-item:nth-child(1) { left: 5%; animation-duration: 18s; animation-delay: 0s; }
+        .fly-item:nth-child(2) { left: 15%; animation-duration: 25s; animation-delay: -5s; }
+        .fly-item:nth-child(3) { left: 25%; animation-duration: 20s; animation-delay: -2s; }
+        .fly-item:nth-child(4) { left: 40%; animation-duration: 22s; animation-delay: -10s; }
+        .fly-item:nth-child(5) { left: 60%; animation-duration: 19s; animation-delay: -7s; }
+        .fly-item:nth-child(6) { left: 75%; animation-duration: 28s; animation-delay: -1s; }
+        .fly-item:nth-child(7) { left: 85%; animation-duration: 24s; animation-delay: -12s; }
+        .fly-item:nth-child(8) { left: 95%; animation-duration: 21s; animation-delay: -3s; }
+
+        /* --- NAVIGATION --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid var(--concrete);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 5%; max-width: 1400px; margin: 0 auto;
+        }
+
+        .logo { font-family: 'Bangers', cursive; font-size: 2.8rem; color: var(--dark-charcoal); text-decoration: none; transition: var(--transition); }
+        .logo:hover { color: var(--vibrant-blue); transform: scale(1.05); }
+
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--dark-charcoal); font-weight: 700; text-transform: uppercase; transition: var(--transition); font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--vibrant-blue); }
+
+        /* --- ACCUEIL --- */
+        #accueil {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.9)), 
+                        url('https://images.unsplash.com/photo-1520156555611-30676f25712e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+            text-align: center; padding: 0 20px;
+            position: relative; z-index: 2;
+        }
+
+        .hero-content { position: relative; z-index: 10; max-width: 800px; }
+
+        .hero-title {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(4rem, 15vw, 10rem);
+            color: var(--dark-charcoal);
+            line-height: 0.9; margin-bottom: 10px;
+        }
+
+        .signature-box {
+            display: inline-block;
+            background: var(--signature-color);
+            font-family: 'Permanent Marker', cursive;
+            padding: 10px 30px;
+            font-size: 1.8rem;
+            transform: rotate(-2deg);
+            margin-bottom: 30px;
+            box-shadow: 8px 8px 0 var(--dark-charcoal);
+            border: 3px solid var(--dark-charcoal);
+        }
+
+        /* --- SECTIONS --- */
+        section { padding: 100px 5%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 5; }
+        .section-title { font-family: 'Bangers', cursive; font-size: 4rem; text-align: center; margin-bottom: 60px; text-transform: uppercase; color: var(--dark-charcoal); }
+
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+        .card {
+            background: var(--pure-white);
+            padding: 40px; border-radius: 25px;
+            box-shadow: var(--shadow-soft);
+            border: 2px solid var(--concrete);
+            transition: var(--transition);
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-strong); border-color: var(--vibrant-blue); }
+        .card h3 { font-family: 'Bangers', cursive; font-size: 2.2rem; margin-bottom: 15px; color: var(--vibrant-blue); }
+        .card p { color: #555; font-size: 1.05rem; }
+
+        /* --- TRICK SELECTOR --- */
+        .trick-selector {
+            background: white; padding: 40px; border-radius: 30px;
+            box-shadow: var(--shadow-strong); border: 2px solid var(--concrete);
+        }
+
+        .trick-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+        .trick-btn {
+            padding: 15px 30px; background: var(--concrete);
+            border: none; border-radius: 50px; font-family: 'Bangers', cursive;
+            font-size: 1.3rem; cursor: pointer; transition: var(--transition);
+            color: var(--dark-charcoal);
+        }
+        .trick-btn.active, .trick-btn:hover { background: var(--dark-charcoal); color: var(--pure-white); transform: scale(1.05); }
+
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; border: 5px solid var(--dark-charcoal); background: #000; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* --- ÉQUIPEMENT --- */
+        .equip-box {
+            display: flex; align-items: center; gap: 50px; flex-wrap: wrap;
+            background: white; padding: 40px; border-radius: 30px; border: 2px solid var(--concrete);
+        }
+        .equip-img { flex: 1; min-width: 300px; }
+        .equip-img img { width: 100%; border-radius: 20px; box-shadow: var(--shadow-soft); border: 5px solid var(--pure-white); }
+        .equip-text { flex: 1; min-width: 300px; }
+        .equip-text h3 { font-family:'Bangers'; font-size:2.5rem; color: var(--vibrant-blue); margin-bottom: 15px; }
+
+        footer { background: var(--dark-charcoal); color: var(--pure-white); padding: 80px 20px; text-align: center; position: relative; z-index: 10; border-top: 5px solid var(--vibrant-blue); }
+        .footer-sig { font-family: 'Permanent Marker', cursive; color: var(--signature-color); font-size: 2.5rem; margin-bottom: 10px; display: block; }
+
+        /* BURGER MENU */
+        .burger { display: none; cursor: pointer; }
+        .burger div { width: 25px; height: 3px; background: var(--dark-charcoal); margin: 5px; transition: var(--transition); }
+
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; right: -100%; top: 70px; height: 100vh; width: 100%; background: white; flex-direction: column; align-items: center; padding-top: 50px; transition: 0.3s; border-top: 1px solid var(--concrete); }
+            .nav-links.active { right: 0; }
+            .burger { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-fly-container">
+    <div class="fly-item skate"></div>
+    <div class="fly-item helmet"></div>
+    <div class="fly-item ramp"></div>
+    <div class="fly-item cone"></div>
+    <div class="fly-item skate"></div>
+    <div class="fly-item wheel"></div>
+    <div class="fly-item ramp"></div>
+    <div class="fly-item helmet"></div>
+    <div class="fly-item skate"></div>
+    <div class="fly-item cone"></div>
+</div>
+
+<header>
+    <nav>
+        <a href="#" class="logo">SK8 FLOW</a>
+        <ul class="nav-links" id="menu">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#anatomie">La Board</a></li>
+            <li><a href="#tutos">Tricks</a></li>
+            <li><a href="#equipement">Sécurité</a></li>
+        </ul>
+        <div class="burger" onclick="toggleMenu()">
+            <div></div><div></div><div></div>
+        </div>
+    </nav>
+</header>
+
+<section id="accueil">
+    <div class="hero-content">
+        <h1 class="hero-title">READY TO RIDE ?</h1>
+        <div class="signature-box">CRÉÉ PAR LÉO BRIEC-YVINOU</div>
+        <p style="font-size: 1.4rem; font-weight: bold; background: rgba(255,255,255,0.7); padding: 10px; border-radius: 10px;">Le guide premium 100% clair pour dominer le skatepark.</p>
+    </div>
+</section>
+
+<section id="anatomie">
+    <h2 class="section-title">La Board</h2>
+    <div class="grid-cards">
+        <div class="card">
+            <h3>Le Plateau</h3>
+            <p>7 plis d'érable canadien. C'est ta base. Choisis bien ta largeur (8.0, 8.25 ou 8.5) selon ton style de ride.</p>
+        </div>
+        <div class="card">
+            <h3>Les Trucks</h3>
+            <p>Indispensables pour tourner et grinder. Garde-les un peu souples au début pour apprendre l'équilibre.</p>
+        </div>
+        <div class="card">
+            <h3>Les Roues</h3>
+            <p>101A (dures) pour la vitesse en park lisse, 90A (molles) pour le confort sur bitume rugueux.</p>
+        </div>
+    </div>
+</section>
+
+<section id="tutos">
+    <h2 class="section-title">Les Tricks</h2>
+    <div class="trick-selector">
+        <div class="trick-nav">
+            <button class="trick-btn active" onclick="changeVid('VZPr1zMXJ0o', 'Ollie', 'Le saut fondamental. Claque le tail et gratte.')">OLLIE</button>
+            <button class="trick-btn" onclick="changeVid('-r9OrK2QLN8', 'Pop Shove-it', 'Fais pivoter la board à 180° sous tes pieds.')">SHOVE-IT</button>
+            <button class="trick-btn" onclick="changeVid('4_uLh-qiK0I', 'Kickflip', 'La rotation complète de la board. Le trick légendaire.')">KICKFLIP</button>
+            <button class="trick-btn" onclick="changeVid('6d7RIhtskFc', 'Kickturn', 'Apprends à tourner rapidement en levant l\'avant.')">KICKTURN</button>
+        </div>
+        <div class="video-wrapper">
+            <iframe id="video-frame" src="https://www.youtube.com/embed/VZPr1zMXJ0o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div style="text-align: center; margin-top: 30px;">
+            <h3 id="vid-title" style="font-family: 'Bangers'; font-size: 2.5rem; color: var(--vibrant-blue);">Ollie</h3>
+            <p id="vid-desc" style="font-size: 1.2rem; color: #555;">Le saut fondamental. Claque le tail et gratte.</p>
+        </div>
+    </div>
+</section>
+
+<section id="equipement">
+    <h2 class="section-title">Style & Sécurité</h2>
+    <div class="equip-box">
+        <div class="equip-img">
+            <img src="https://cdn.discordapp.com/attachments/1494640443357659146/1494741311155343563/IMG_9052.png?ex=69e3b5d3&is=69e26453&hm=94118fd88b7eabcdfa369b2b865b7d7980f514c018daf23e0141624274bc0ca9&" alt="Léo Skate Protections">
+        </div>
+        <div class="equip-text">
+            <h3>Ride Safe, Ride Long</h3>
+            <p>Même les pros portent des protections pour tenter des trucs plus fous. Un bon casque et des genouillères te permettent de progresser sans peur.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <span class="footer-sig">LÉO BRIEC-YVINOU</span>
+    <p>© 2026 - Guide Skateboarding Pro Premium</p>
+</footer>
+
+<script>
+    function toggleMenu() { document.getElementById('menu').classList.toggle('active'); }
+    
+    function changeVid(id, title, desc) {
+        // Transformation automatique en lien embed compatible
+        document.getElementById('video-frame').src = "https://www.youtube.com/embed/" + id;
+        document.getElementById('vid-title').innerText = title;
+        document.getElementById('vid-desc').innerText = desc;
+        const btns = document.querySelectorAll('.trick-btn');
+        btns.forEach(b => b.classList.remove('active'));
+        
+        if (event && event.target) {
+            event.target.classList.add('active');
+        }
+    }
+</script>
+
+</body>
+</html>
